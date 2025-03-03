@@ -120,9 +120,11 @@ def recommend_products(request):
 class ProductRecommender:
     
     def __init__(self):
-        vectors_path = '/faiss_index/product_vectors.npz'
+
+        vectors_path = os.path.join(settings.BASE_DIR, 'faiss_index', 'product_vectors.npz')
+        vectorizer_path = os.path.join(settings.BASE_DIR, 'faiss_index', 'vectorizer_french.pkl')
         self.product_vectors = sparse.load_npz(vectors_path)
-        vectorizer_path = '/faiss_index/vectorizer_french.pkl'
+
         with open(vectorizer_path, 'rb') as f:
             self.vectorizer = pickle.load(f)
 
@@ -242,7 +244,10 @@ class ProductRecommender:
 
         # Sauvegarder le graphique
         chart_path = f"histogram.png"
-        full_path = os.path.join("static", chart_path)
+        full_path = os.path.join(settings.MEDIA_ROOT, chart_path)
+
+        # Créez le dossier s'il n'existe pas
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
         plt.savefig(full_path, bbox_inches='tight')
         plt.close(fig)
 

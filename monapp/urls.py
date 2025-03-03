@@ -12,5 +12,5 @@ urlpatterns = [
     path('product/<uuid:product_id>/', views.product_detail, name='product_detail'),
     path('filter/', views.recommend_products, name='recommend_products'),
 
- ]
+ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

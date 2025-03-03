@@ -27,3 +27,8 @@ data/*.csv
 poubelle/*.npy
 *.npy
 *.csv
+
+# Ne pas ignorer les fichiers de faiss_index
+!faiss_index/
+!faiss_index/product_vectors.npz
+!faiss_index/vectorizer_french.pkl
