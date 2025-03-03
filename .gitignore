@@ -32,3 +32,4 @@ poubelle/*.npy
 !faiss_index/
 !faiss_index/product_vectors.npz
 !faiss_index/vectorizer_french.pkl
+!static

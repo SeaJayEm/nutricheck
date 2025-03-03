@@ -133,12 +133,13 @@ STATIC_URL = '/static/'
 # Où Whitenoise va chercher et servir les fichiers statiques en production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Dossier local pour les fichiers statiques
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
 # Dossier où collecter les fichiers statiques en production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Dossier local pour les fichiers statiques
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
