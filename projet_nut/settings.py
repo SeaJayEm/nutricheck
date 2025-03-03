@@ -40,7 +40,7 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['nutricheck.onrender.com', 'localhost', '127.0.0.1']
 

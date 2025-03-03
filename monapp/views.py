@@ -22,6 +22,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from django.conf import settings
 from django.conf.urls.static import static 
+import faiss
+
+
 
 def accueil(request):
     return render(request, 'monapp/accueil.html')
@@ -122,36 +125,41 @@ def recommend_products(request):
 class ProductRecommender:
     
     def __init__(self):
-
         vectors_path = os.path.join(settings.BASE_DIR, 'faiss_index', 'product_vectors.npz')
         vectorizer_path = os.path.join(settings.BASE_DIR, 'faiss_index', 'vectorizer_french.pkl')
-        self.product_vectors = sparse.load_npz(vectors_path)
-
+        self.product_vectors = sparse.load_npz(vectors_path).astype('float32') #Faiss works with float32        
         with open(vectorizer_path, 'rb') as f:
             self.vectorizer = pickle.load(f)
+        self._product_ids = list(Product.objects.values_list('id', flat=True))  # Store only IDs
+        # Build Faiss index
+        dimension = self.product_vectors.shape[1]
+        self.index = faiss.IndexFlatL2(dimension)  # Or another suitable index
+        self.index.add(self.product_vectors.toarray()) # Add vectors to index
 
-        # Charger la liste des produits
-        self.products = list(Product.objects.all())
+    def get_product_by_id(self, product_id):
+        # Fetch product only when needed
+        try:
+            product_index = self._product_ids.index(product_id)
+            return Product.objects.get(id=product_id) #Fetch only the needed product
+        except ValueError:
+            print(f"Product with ID {product_id} not found.")
+            return None
 
     def get_recommendations(self, product_id, preferences, k=20):
-        try:
-            base_product_index = next(i for i, product in enumerate(self.products) if product.id == product_id)
-            base_product = self.products[base_product_index]
-        except (StopIteration, IndexError):
-            print(f"Product with ID {product_id} not found.")
+        base_product = self.get_product_by_id(product_id)
+        if not base_product:
             return []
 
+        base_product_index = self._product_ids.index(product_id) # Get index from stored IDs
+
         # Utiliser le vecteur précalculé pour le produit de base
-        product_vec = self.product_vectors[base_product_index].reshape(1, -1)
+        product_vec = self.product_vectors[base_product_index].reshape(1, -1).toarray().astype('float32')
+        
+        # Use Faiss to find the k nearest neighbors
+        D, I = self.index.search(product_vec, k + 1)  # Search the index
+        similar_indices = I[0][1:]  # Exclude the base product itself
 
-        # Calculer la similarité cosinus entre le produit de base et tous les autres produits
-        cosine_similarities = cosine_similarity(product_vec, self.product_vectors).flatten()
-
-        # Obtenir les indices des produits les plus similaires
-        similar_indices = cosine_similarities.argsort()[-(k + 1):][::-1]
-
-        # Récupération des produits similaires
-        candidates = [self.products[i] for i in similar_indices if i != base_product_index]
+        candidates = [self.get_product_by_id(self._product_ids[i]) for i in similar_indices if self.get_product_by_id(self._product_ids[i])]
 
         preference_weights = {
             'less_sugar': lambda x: x.sugars_100g,
