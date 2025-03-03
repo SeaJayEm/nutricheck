@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .views import recommend_products
+from django.conf import settings
+from django.conf.urls.static import static 
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),
@@ -11,6 +13,5 @@ urlpatterns = [
     path('chat/', views.chat_response, name='chat_response'),
     path('product/<uuid:product_id>/', views.product_detail, name='product_detail'),
     path('filter/', views.recommend_products, name='recommend_products'),
-
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

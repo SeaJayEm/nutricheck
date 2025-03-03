@@ -20,6 +20,8 @@ import random
 import seaborn as sns
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from django.conf import settings
+from django.conf.urls.static import static 
 
 def accueil(request):
     return render(request, 'monapp/accueil.html')
