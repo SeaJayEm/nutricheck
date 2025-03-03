@@ -120,9 +120,9 @@ def recommend_products(request):
 class ProductRecommender:
     
     def __init__(self):
-        vectors_path = 'C:/Users/clair/OneDrive/Documents/Wild/Projet_3/projet_nut/faiss_index/product_vectors.npz'
+        vectors_path = '/faiss_index/product_vectors.npz'
         self.product_vectors = sparse.load_npz(vectors_path)
-        vectorizer_path = 'C:/Users/clair/OneDrive/Documents/Wild/Projet_3/projet_nut/faiss_index/vectorizer_french.pkl'
+        vectorizer_path = '/faiss_index/vectorizer_french.pkl'
         with open(vectorizer_path, 'rb') as f:
             self.vectorizer = pickle.load(f)
 

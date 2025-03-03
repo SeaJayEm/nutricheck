@@ -127,6 +127,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Si vous utilisez un dossier `static` à la racine
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Pour la collecte des fichiers statiques en prod
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

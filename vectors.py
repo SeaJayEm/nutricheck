@@ -23,7 +23,7 @@ vectorizer = TfidfVectorizer(max_features=5000)  # Réduit à 5000
 product_vectors = vectorizer.fit_transform(combined_texts)
 
 # Créer le répertoire
-vectors_path = 'C:/Users/clair/OneDrive/Documents/Wild/Projet_3/projet_nut/faiss_index/product_vectors.npz'
+vectors_path = '/faiss_index/product_vectors.npz'
 os.makedirs(os.path.dirname(vectors_path), exist_ok=True)
 
 # Sauvegarder en format sparse
@@ -31,7 +31,7 @@ sparse.save_npz(vectors_path, product_vectors)
 
 # Sauvegarder le vectorizer
 import pickle
-vectorizer_path = 'C:/Users/clair/OneDrive/Documents/Wild/Projet_3/projet_nut/faiss_index/vectorizer_french.pkl'
+vectorizer_path = '/projet_nut/faiss_index/vectorizer_french.pkl'
 with open(vectorizer_path, 'wb') as f:
     pickle.dump(vectorizer, f)
 
