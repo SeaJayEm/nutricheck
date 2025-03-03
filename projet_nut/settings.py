@@ -14,6 +14,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 import dj_database_url
+import faiss
+
+faiss.omp_set_num_threads(1)  # Limite l'utilisation CPU pour éviter un crash sur Render
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,11 +33,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Cette URL par défaut sera utilisée en développement local
-        default='postgresql://postgres:postgres@localhost:5432/postgres',
-        conn_max_age=600
-    )
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')

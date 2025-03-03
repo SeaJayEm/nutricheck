@@ -69,7 +69,7 @@ def import_products(csv_file_path):
     return products_created
 
 if __name__ == '__main__':
-    csv_path = r'\data\combined_data.csv'
+    csv_path = r'data\combined_data.csv'
 
     print("Début de l'import...")
     nb_products = import_products(csv_path)
