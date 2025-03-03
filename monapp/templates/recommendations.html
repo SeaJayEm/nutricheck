@@ -1,0 +1,61 @@
+{% extends 'monapp/base.html' %}
+{% load static %}
+{% block title %}NutriCheck - Votre Assistant Nutrition{% endblock %}
+{% block content %}
+<main class="search-container">
+    <div class="results-container">
+        {% if products %}
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-details">
+                        <a href="{% url 'product_detail' product.id %}" class="product-link">
+                            <div class="product-header">
+                                    <img src="{{ product.image_url }}" alt="{{ product.product_name|title }}" width="100">
+
+                                <div class="product-title">
+                                    <h3 class="product-name">{{ product.product_name|title }} ({{product.brands}})</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="eco-scores">
+                            <div class="score">
+                                <div class="score-scale">
+                                    <span class="score-{{ product.nutriscore_grade|lower }}">{{ product.nutriscore_grade|upper }}</span>
+                                </div>
+                                <span class="score-label" style="font-size: 0.8rem; text-align: center;">Nutriscore</span>
+                            </div>
+                            <div class="score">
+                                <div class="score-scale">
+                                    <span class="eco-{{ product.ecoscore_grade|lower }}">{{ product.ecoscore_grade|upper }}</span>
+                                </div>
+                                <span class="score-label" style="font-size: 0.8rem; text-align: center;">Ecoscore</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="nutrient-group">
+                            <h4 class="nutrient-title">Informations</h4>
+                            <div class="nutrient-item"><b>Magasins :</b> {{ product.stores|default:'N/A' }}</div>
+                            <div class="nutrient-item"><b>Énergie :</b> {{ product.energy_kcal_100g|default:'N/A' }} kcal/100g</div>
+                            <div class="nutrient-item"><b>Nutriscore :</b> {{ product.nutriscore_grade|title|default:'N/A' }}</div>
+                            <div class="nutrient-item"><b>Ecoscore :</b> {{ product.ecoscore_grade|title|default:'N/A' }}</div>
+                            <div class="nutrient-item"><b>Protéines :</b> {{ product.proteins_100g|default:'N/A' }} %</div>
+                            <div class="nutrient-item"><b>Sucres :</b> {{ product.sugars_100g|default:'N/A' }} %</div>
+                            <div class="nutrient-item"><b>Sel :</b> {{ product.salt_100g|default:'N/A' }} %</div>
+                            <div class="nutrient-item"><b>Graisses :</b> {{ product.fat_100g|default:'N/A' }} %</div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun produit trouvé.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{% static 'monapp/js/script.js' %}"></script>
+<script defer src="{% static 'monapp/js/chatbot.js' %}"></script>
+{% endblock %}

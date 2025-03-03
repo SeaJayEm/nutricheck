@@ -1,0 +1,29 @@
+# Environnement virtuel
+env_proj_3/
+venv/
+
+# Fichiers Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Base de données
+db.sqlite3
+
+# Fichiers sensibles
+.env
+
+# Fichiers systèmes
+.DS_Store
+Thumbs.db
+
+# Fichiers IDE
+.vscode/
+.idea/
+
+# Fichiers de données
+data/*.csv
+poubelle/*.npy
+*.npy
+*.csv

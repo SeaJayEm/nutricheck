@@ -1,0 +1,13 @@
+{% extends 'monapp/base.html' %}
+{% load static %}
+
+{% block title %}NutriCheck - Votre Assistant Nutrition{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Rechercher</button>
+</form>
+
+{% endblock %}

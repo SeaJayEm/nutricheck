@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div style="display: flex; max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; gap: 2rem;">
+    <!-- Colonne de gauche pour les produits -->
+    <div style="flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+        {% for product in recommendations %}
+        <div style="padding-top: 10px;  background-color: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden; text-align: center;">
+            <img src="{{ product.image_url }}" alt="{{ product.product_name }}" style="width: auto; height: 8.45rem; object-fit: contain; display: block; margin: 0 auto; border-radius: 0.5rem">
+            <div style="padding: 1rem; margin-bottom: 0.2rem;">
+                <h2 style="font-size: 0.9rem; font-weight: bold; margin-bottom: 0.8rem;">{{ product.product_name }} ({{ product.brands }})</h2>
+                <div style="font-size: 0.75rem; margin-bottom: 0.4rem;">
+                    <span style="font-weight: 600;">Valeur énergétique :</span> {{ product.energy_kcal_100g|floatformat:0 }} kCal/100g
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem; margin-bottom: 1rem;">
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Nutriscore :</span> {{ product.nutriscore_grade|upper }}
+                    </div>
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Écoscore :</span> {{ product.ecoscore_grade|upper }}
+                    </div>
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Sucres :</span> {{ product.sugars_100g }} g
+                    </div>
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Protéines :</span> {{ product.proteins_100g }} %
+                    </div>
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Graisses :</span> {{ product.fat_100g }} %
+                    </div>
+                    <div style="font-size: 0.75rem;">
+                        <span style="font-weight: 600;">Sel :</span> {{ product.salt_100g }} %
+                    </div>
+                </div>
+                <a href="{% url 'product_detail' product.id %}" style="display: block; background-color: #529B9B; color: #fff; padding: 0.3rem 0.8rem; border-radius: 0.5rem;">
+                    Choisir ce produit
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Colonne de droite pour le graphique -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: flex-start;">
+        <img src="{% static chart_path %}" alt="Histogram" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: 0;">
+        <!-- Affichage des jauges -->
+        <iframe src="{% static 'nutriscore_gauges.html' %}" style="width: 100%; background-color: white; height: 300px; border: none; margin-top: 20px; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></iframe>
+    </div>
+</div>
+{% endblock %}

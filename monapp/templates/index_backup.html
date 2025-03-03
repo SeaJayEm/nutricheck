@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>NutriCheck - Votre Assistant Nutrition</title>
+   <link rel="stylesheet" href="{% static 'monapp/css/style.css' %}">
+   <script defer src="{% static 'monapp/js/script.js' %}"></script>
+   <script defer src="{% static 'monapp/js/chatbot.js' %}"></script>
+</head>
+<body>
+   <header>
+       <h1>NutriCheck</h1>
+       <p>Découvrez la composition nutritionnelle de vos aliments</p>
+   </header>
+   <main class="search-container">
+       <div class="search-box">
+           <input type="text" id="searchInput" placeholder="Entrez le nom d'un produit...">
+           <button onclick="searchProduct()">Rechercher</button>
+       </div>
+       <div class="results" id="results"></div>
+   </main>
+   <footer class="footer">
+       <div class="chat-container">
+           <div class="chat-header" onclick="toggleChat()">
+               💬 Besoin d'aide sur les ingrédients ?
+           </div>
+           <div class="chat-body" id="chatBody">
+               <div id="chatMessages"></div>
+               <input type="text" id="chatInput" placeholder="Posez une question..." onkeypress="handleKeyPress(event)">
+               <button onclick="sendMessage()">Envoyer</button>
+           </div>
+       </div>
+       <p>© 2025 NutriScan Zséno-Claire-Laetitia-Halim - API by OpenFoodFacts</p>
+   </footer>
+   <script src="{% static 'monapp/js/script.js' %}"></script>
+   <script src="{% static 'monapp/js/chatbot.js' %}"></script>
+</body>
+</html>

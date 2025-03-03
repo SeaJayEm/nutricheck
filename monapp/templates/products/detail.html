@@ -1,0 +1,92 @@
+{% extends 'monapp/base.html' %}
+{% block content %}
+<div style="display: flex; gap: 2rem; align-items: flex-start; width: 100%;">
+    <!-- Colonne 1 : Nom et Image du produit -->
+    <div style="flex: 1; max-width: 25%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <!-- Nom du produit -->
+        <h1 style="font-size: 1.2rem; font-weight: bold; text-align: center;">{{ product.product_name|title }} ({{ product.brands }})</h1>
+
+        <!-- Image du produit -->
+        <img src="{{ product.image_url }}" alt="{{ product.product_name }}"
+             style="width: auto; height: 250px; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    </div>
+
+    <!-- Colonne 2 : Caractéristiques du produit -->
+    <div style="flex: 1; max-width: 25%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem; width: 100%;">
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Nutriscore: {{ product.nutriscore_grade|upper }}</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Écoscore: {{ product.ecoscore_grade|upper }}</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Sucre: {{ product.sugars_100g }} %</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Protéines: {{ product.proteins_100g }} %</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Fibres: {{ product.fibers_100g }} %</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Graisses: {{ product.fat_100g }} %</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Graisses saturées: {{ product.saturated_fat_100g }} %</p>
+            </div>
+            <div style="background-color: #f7fafc; padding: 0.5rem; border-radius: 0.25rem;">
+                <p style="font-weight: 600; font-size: 0.8rem;">Sel: {{ product.salt_100g }} %</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Colonne 3 : Formulaire -->
+    <div style="flex: 1; max-width: 40%; background-color: #fff; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <form method="POST" style="background-color: #fff; padding: 0.2rem; flex: 1;">
+            {% csrf_token %}
+            <h2 style="font-size: 1rem; font-weight: bold; margin-bottom: 1rem;">Trouver des alternatives selon vos préférences</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="less_sugar">
+                    <span>Moins de sucre</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="more_protein">
+                    <span>Plus de protéines</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="better_nutriscore">
+                    <span>Meilleur Nutriscore</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="better_ecoscore">
+                    <span>Meilleur Écoscore</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="more_fiber">
+                    <span>Plus de fibres</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="less_fat">
+                    <span>Moins de graisses</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="less_saturated_fat">
+                    <span>Moins de graisses saturées</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <input type="checkbox" name="less_salt">
+                    <span>Moins de sel</span>
+                </label>
+            </div>
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" style="margin-top: 1.5rem; background-color: #529B9B; color: #fff; padding: 0.5rem 1.5rem; border-radius: 0.5rem;">
+                Trouver des alternatives
+            </button>
+        </div>
+    </form>
+    </div>
+</div>
+
+{% endblock %}

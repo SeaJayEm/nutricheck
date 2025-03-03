@@ -1,0 +1,913 @@
+/* Variables pour la palette de couleurs */
+:root {
+  --primary: #529B9B;    /* Le vert-bleu du header */
+  --secondary: #9FD4D4;  /* Une version plus claire pour les accents */
+  --background: #E6F7F7; /* Le bleu très clair du fond */
+  --text: #403f3f;       /* Pour le texte principal */
+  --white: #FFFFFF;      /* Pour le texte sur fond coloré */
+  --title-font: 'Gill Sans', sans-serif;
+  --body-font: 'Poppins', sans-serif;
+}
+
+/* Reset de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--body-font);
+}
+
+/* Style de base */
+body {
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Header fixe */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--primary);
+  color: var(--white);
+  height: 70px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+/* Container principal */
+.main-container {
+  max-width: 1200px;
+  margin: 80px auto 0;  /* margin-top pour compenser le header fixe */
+  padding: 2rem;
+}
+
+/* Barre de recherche */
+.search-container {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--secondary);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.button {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: var(--secondary);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary);
+ /* color: var(--white); */
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Styles spécifiques à la page d'accueil */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.hero-section h1 {
+    font-family: var(--title-font);
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+}
+
+.features-section {
+    padding: 4rem 2rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+.features-section h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--background);
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.search-redirect {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.search-redirect .button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* En-tête du produit */
+.product-header {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.3rem;
+    align-items: flex-start;
+}
+
+.product-image {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid var(--secondary);
+    background: var(--white);
+    padding: 0.3rem;
+}
+
+.no-image {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.product-name {
+font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.product-title p {
+    color: var(--text);
+    margin: 0.5rem 0;
+}
+
+.nutrient-group {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.nutrient-title {
+   color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.nutrient-item {
+    padding: 0.3rem 0;
+}
+
+.nutrient-group div:not(.nutrient-title) {
+    padding: 0.3rem 0;
+}
+
+.nutrient-group div:last-child {
+    border-bottom: none;
+}
+
+.product-title {
+    flex: 1;
+}
+
+.product-title h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.eco-scores {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+/* Styles spécifiques à la page de recherche */
+/* Styles pour la barre de recherche */
+.search-box {
+    display: flex;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.search-box input[type="text"] {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.search-box input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    outline: none;
+}
+
+.search-box button {
+    padding: 1rem 2rem;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-box button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Container principal de recherche */
+.search-container {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Conteneur des résultats */
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 colonnes adaptatives */
+    gap: 1.5rem; /* Espacement entre les cartes */
+    justify-content: center;
+}
+
+/* Styles pour les résultats */
+.results {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Style du chat */
+.chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 370px;
+    background-color: rgba(255, 255, 255, 0.9); /* Opacité pour la lisibilité */
+    backdrop-filter: blur(10px); /* Flou artistique */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    font-family: var(--body-font);
+    z-index: 1001; /* Pour être au-dessus des autres éléments */
+}
+
+.chat-header {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 15px 15px 0 0;
+}
+
+.chat-body {
+    display: none; /* Initialement caché */
+    padding: 10px;
+    background-color: var(--background);
+    border-radius: 0 0 15px 15px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+#chatMessages {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+input[type="text"] {
+    width: calc(100% - 50px);
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#chatInput {
+    width: calc(100% - 60px); /* Ajusté pour le bouton */
+    padding: 0.8rem;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    margin-top: 1rem;
+    outline: none;
+}
+
+.chat-body button {
+    width: 50px;
+    padding: 0.8rem;
+    background-color: var(--primary); /* Couleur de votre charte */
+    color: var(--white); /* Texte clair */
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between; /* Répartit l'espace entre le logo et les boutons */
+    align-items: center; /* Centre les éléments verticalement */
+    padding: 10px 20px;
+}
+
+/* Style pour le logo */
+#logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-container h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header-nav {
+    margin-left: auto;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--secondary);
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+
+/* Styles pour la section héros */
+.hero-subtitle {
+    font-family: var(--body-font);
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Styles pour la section manifeste */
+.manifesto-section {
+    background-color: var(--white);
+    border-radius: 10px;
+    margin: 2rem auto;
+    padding: 3rem 2rem;
+    max-width: 900px;
+}
+
+.manifesto-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.manifesto-text {
+    font-family: var(--body-font);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+.manifesto-highlight {
+    font-family: var(--body-font);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--primary);
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--background);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+/* Amélioration des feature cards */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.feature-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card python manage.py runserver {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.feature-card p {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Section explicative des scores */
+.explanatory-section {
+    background-color: var(--white);
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    border-radius: 15px;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.score-label {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.score-explanation {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 10px;
+}
+
+.score-scale {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    justify-content: flex-start;
+}
+
+.score-scale span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+}
+
+/* Couleurs Nutri-Score */
+.score-a { background-color: #038141; }
+.score-b { background-color: #85BB2F; }
+.score-c { background-color: #FECB02; }
+.score-d { background-color: #EE8100; }
+.score-e { background-color: #E63E11; }
+
+/* Couleurs Éco-Score */
+.eco-a { background-color: #1E8F4E; }
+.eco-b { background-color: #2ECC71; }
+.eco-c { background-color: #FFD700; }
+.eco-d { background-color: #FF7F50; }
+.eco-e { background-color: #E74C3C; }
+
+.score-explanation ul {
+    list-style-position: inside;
+    margin-top: 1rem;
+}
+
+.score-explanation li {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+}
+
+
+
+/* Styles pour la page équipe */
+.team-hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--white);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.team-hero-section h1 {
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.team-subtitle {
+    font-size: 1.3rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.team-manifesto {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.team-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.team-highlight {
+    font-size: 1.3rem;
+    color: var(--primary);
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--background);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-member-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.team-member-card:hover {
+    transform: translateY(-10px);
+}
+
+.team-member-card a img {
+    vertical-align: middle;
+}
+
+.social-icons {
+    display: flex;
+    gap: 8px; /* Ajuste l'espace entre les logos */
+    justify-content: center;
+    align-items: center;
+}
+
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+.team-member-card h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-role {
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.member-desc {
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.team-conclusion {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.conclusion-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.conclusion-highlight {
+    font-size: 1.3rem;
+    color: var(--primary);
+    font-weight: 500;
+    padding: 1.5rem;
+    background-color: var(--background);
+    border-radius: 8px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    background: var(--white);
+    border-radius: 15px;
+    color: var(--text);
+    font-style: italic;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.product-card {
+    background: var(--white);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.product-info h2 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.product-info p {
+    margin: 0.3rem 0;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .product-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-image, .no-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .eco-scores {
+        gap: 0.1rem;
+    }
+}
+
+a img:hover {
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.user-message, .bot-message {
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: var(--primary); /* Couleur sombre pour l'utilisateur */
+    color: var(--white); /* Texte clair */
+    float: right; /* Aligner à droite */
+}
+
+.bot-message {
+    background-color: var(--white); /* Fond clair pour le bot */
+    color: var(--text); /* Texte sombre de votre charte */
+    float: left; /* Aligner à gauche */
+}
+
+.footer-text {
+    color: white;
+}
+
+a {
+    color: #007BFF; /* Bleu typique des liens */
+    text-decoration: none !important; /* Enlève le soulignement */
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline; /* Ajoute un soulignement au survol */
+}
+
+.product-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-details {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-info {
+    flex: 1;
+    padding: 0.5rem;
+    border-left: 1px solid #ddd;
+}
+
+.product-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.product-title {
+    text-align: center;
+}
+
+.eco-scores {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.score-scale {
+    font-weight: bold;
+}
+
+.nutrient-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.nutrient-item {
+    font-size: 0.8rem;
+}

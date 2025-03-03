@@ -1,0 +1,77 @@
+{% extends 'monapp/base.html' %}
+{% load static %}
+
+{% block title %}NutriCheck - Votre Assistant Nutrition{% endblock %}
+
+{% block content %}
+<main class="search-container">
+    <div class="team-hero-section">
+        <h1>🔍 Trouver votre produit</h1>
+        <h2 class="team-subtitle">Nutri-score, Eco-score : analysez votre produit en un instant !</h2>
+    </div>
+
+    <form method="POST" action="{% url 'recommend_products' %}" class="search-box">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="text" name="product_type" id="searchInput" placeholder="Entrez le nom d'un produit...">
+        <button type="submit" class="search-button">Rechercher</button>
+    </form>
+
+    <div class="results-container">
+        {% if products %}
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-header">
+                        {% if product.image_url %}
+                            <img src="{{ product.image_url }}" alt="{{ product.product_name }}" class="product-image">
+                        {% else %}
+                            <div class="no-image">Pas d'image disponible</div>
+                        {% endif %}
+                        <div class="product-title">
+                            <h3 class="product-name">{{ product.product_name }}</h3>
+                            <p>Marque : {{ product.brands|default:'Non spécifié' }}</p>
+                            <p>Quantité : {{ product.quantity|default:'Non spécifié' }}</p>
+                            <p>Magasin : {{ product.stores|default:'Non spécifié' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="eco-scores">
+                        <div class="score">
+                            <div class="score-scale">
+                                <span class="score-{{ product.nutriscore_grade|lower }}">{{ product.nutriscore_grade|upper }}</span>
+                            </div>
+                            <span class="score-label">Nutri-Score</span>
+                        </div>
+                        <div class="score">
+                            <div class="score-scale">
+                                <span class="eco-{{ product.ecoscore_grade|lower }}">{{ product.ecoscore_grade|upper }}</span>
+                            </div>
+                            <span class="score-label">Eco-Score</span>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="nutrient-group">
+                            <h4 class="nutrient-title">Nutriments pour 100g</h4>
+                            <div class="nutrient-item">Énergie : {{ product.energy_kcal_100g|default:'N/A' }} kcal</div>
+                            <div class="nutrient-item">Protéines : {{ product.proteins_100g|default:'N/A' }} g</div>
+                            <div class="nutrient-item">Sucres : {{ product.sugars_100g|default:'N/A' }} g</div>
+                            <div class="nutrient-item">Sel : {{ product.salt_100g|default:'N/A' }} g</div>
+                            <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image_url }}" alt="{{ product.product_name }}" width="100">
+                </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{% static 'monapp/js/script.js' %}"></script>
+<script defer src="{% static 'monapp/js/chatbot.js' %}"></script>
+{% endblock %}
