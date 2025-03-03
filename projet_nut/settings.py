@@ -50,6 +50,7 @@ ALLOWED_HOSTS = ['nutricheck.onrender.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Ajoute cette ligne
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -125,9 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Si vous utilisez un dossier `static` à la racine
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Pour la collecte des fichiers statiques en prod
+# Où Django va chercher les fichiers statiques pendant le développement
+STATIC_URL = '/static/'
+
+# Où Whitenoise va chercher et servir les fichiers statiques en production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Dossier local pour les fichiers statiques
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Dossier où collecter les fichiers statiques en production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
